@@ -3,9 +3,9 @@ package org.firebears.betaTestRobot1;
 import static java.lang.Math.abs;
 
 import java.io.PrintStream;
-import java.util.TreeSet;
 
 import org.firebears.util.CANTalon;
+import org.firebears.util.RoboReport;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -45,30 +45,7 @@ public class Robot extends IterativeRobot {
 		pdp.clearStickyFaults();
 		(new Compressor()).clearAllPCMStickyFaults();
 		
-		// Cause the roboRIO to print out a lot of things about it's JRE
-		out.println("::: robotInit : " + this.getClass());
-		out.printf(":::     availableProcessors : %d%n", Runtime.getRuntime().availableProcessors());
-		out.printf(":::     totalMemory : %d%n", Runtime.getRuntime().totalMemory());
-		out.printf(":::     maxMemory : %d%n", Runtime.getRuntime().maxMemory());
-		out.printf(":::     freeMemory : %d%n", Runtime.getRuntime().freeMemory());
-		for (String propName : (new TreeSet<String>(System.getProperties().stringPropertyNames()))) {
-			if (propName.equals(" line.separator"))  continue;
-			out.printf(":::     %s : %s%n", propName, System.getProperty(propName));
-		}
-		for (String varName : (new TreeSet<String>(System.getenv().keySet()))) {
-			out.printf(":::     %s : %s%n", varName, System.getenv(varName));
-		}
-	}
-
-	@Override
-	public void teleopInit() {
-		// Verify that we can connect to components and to the driver's station
-		out.printf("::: alliance = %s%n", driverStation.getAlliance());
-		out.printf("::: voltage = %5.2f%n", pdp.getVoltage());
-		out.printf("::: current = %5.2f%n", pdp.getTotalCurrent());
-		out.printf("::: PDP temp = %5.2f%n", pdp.getTemperature());
-		out.printf("::: motor temp = %5.2f%n", motor.getTemperature());
-		out.println(":::");
+		RoboReport.print(System.out);
 	}
 
 	@Override
