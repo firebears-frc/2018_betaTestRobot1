@@ -30,6 +30,7 @@ public class RobotReport {
 	private Map<Integer, Tuple> analogInputMap = new TreeMap<>();
 	private Map<Integer, Tuple> pwmMap = new TreeMap<>();
 	private Map<Integer, Tuple> canMap = new TreeMap<>();
+	private Map<Integer, Tuple> relayMap = new TreeMap<>();
 	private Map<Integer, Tuple> joystickMap = new TreeMap<>();
 	private Map<Integer, Map<Integer, Tuple>> joystickButtonMap = new TreeMap<>();
 	private Map<Integer, String> otherConfigMap = new TreeMap<>();
@@ -59,6 +60,10 @@ public class RobotReport {
 
 	public void addCAN(Integer id, String desc, Object component) {
 		canMap.put(id, new Tuple(desc, component));
+	}
+	
+	public void addRelay(Integer id, String desc, Object component) {
+		relayMap.put(id, new Tuple(desc, component));
 	}
 	
 	public void addOtherConfig(Integer id, String desc) {
@@ -121,6 +126,15 @@ public class RobotReport {
 			out.println();
 			for (Integer id : canMap.keySet()) {
 				out.printf("* %d = %s%n", id, canMap.get(id));
+			}
+			out.println();
+		}
+		
+		if (!relayMap.isEmpty()) {
+			out.println("## Relays");
+			out.println();
+			for (Integer id : relayMap.keySet()) {
+				out.printf("* %d = %s%n", id, relayMap.get(id));
 			}
 			out.println();
 		}
