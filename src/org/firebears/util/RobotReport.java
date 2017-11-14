@@ -94,33 +94,6 @@ public class RobotReport {
 			out.println();
 		}
 
-		if (!digitalIoMap.isEmpty()) {
-			out.println("## Digital IOs");
-			out.println();
-			for (Integer id : digitalIoMap.keySet()) {
-				out.printf("* %d = %s%n", id, digitalIoMap.get(id));
-			}
-			out.println();
-		}
-
-		if (!analogInputMap.isEmpty()) {
-			out.println("## Analog Inputs");
-			out.println();
-			for (Integer id : analogInputMap.keySet()) {
-				out.printf("* %d = %s%n", id, analogInputMap.get(id));
-			}
-			out.println();
-		}
-
-		if (!pwmMap.isEmpty()) {
-			out.println("## PWMs");
-			out.println();
-			for (Integer id : pwmMap.keySet()) {
-				out.printf("* %d = %s%n", id, pwmMap.get(id));
-			}
-			out.println();
-		}
-
 		if (!canMap.isEmpty()) {
 			out.println("## CAN");
 			out.println();
@@ -130,11 +103,38 @@ public class RobotReport {
 			out.println();
 		}
 		
+		if (!digitalIoMap.isEmpty()) {
+			out.println("## DIO");
+			out.println();
+			for (Integer id : digitalIoMap.keySet()) {
+				out.printf("* %d = %s%n", id, digitalIoMap.get(id));
+			}
+			out.println();
+		}
+		
 		if (!relayMap.isEmpty()) {
-			out.println("## Relays");
+			out.println("## RELAY");
 			out.println();
 			for (Integer id : relayMap.keySet()) {
 				out.printf("* %d = %s%n", id, relayMap.get(id));
+			}
+			out.println();
+		}
+
+		if (!analogInputMap.isEmpty()) {
+			out.println("## ANALOG IN");
+			out.println();
+			for (Integer id : analogInputMap.keySet()) {
+				out.printf("* %d = %s%n", id, analogInputMap.get(id));
+			}
+			out.println();
+		}
+
+		if (!pwmMap.isEmpty()) {
+			out.println("## PWM");
+			out.println();
+			for (Integer id : pwmMap.keySet()) {
+				out.printf("* %d = %s%n", id, pwmMap.get(id));
 			}
 			out.println();
 		}
