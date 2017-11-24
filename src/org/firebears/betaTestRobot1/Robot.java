@@ -56,7 +56,7 @@ public class Robot extends IterativeRobot {
 		(new Compressor()).clearAllPCMStickyFaults();
 
 		report.write(System.out);
-		report.write(new File("/home/lvuser/robotReport.md"));
+		report.write(new File(System.getProperty("user.home"), "robotReport.md"));
 	}
 
 	@Override
