@@ -11,10 +11,11 @@ import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.EntryNotification;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 
-public class CANTalon implements SpeedController, LiveWindowSendable {
+public class CANTalon implements SpeedController, Sendable {
 
 	private final int timeoutMs = 100;
 	private final TalonSRX talonSRX;
@@ -25,6 +26,8 @@ public class CANTalon implements SpeedController, LiveWindowSendable {
 	private NetworkTableEntry m_valueEntry;
 	private int m_valueListener;
 	private double currentSpeed = 0.0;
+	private String name = null;
+	private String subsystem = null;
 
 	public CANTalon(int deviceNumber) {
 		talonSRX = new TalonSRX(deviceNumber);
@@ -41,20 +44,20 @@ public class CANTalon implements SpeedController, LiveWindowSendable {
 			}
 		}
 	}
-
+	
 	@Deprecated
 	public void clearStickyFaults() {
 		talonSRX.clearStickyFaults(timeoutMs);
 	}
-
+	
 	public void configEncoderCodesPerRev(int ticks) {
 		// ????
 	}
-
+	
 	public void configNominalOutputVoltage(double forwardVoltage, double reverseVoltage) {
 		// ????
 	}
-
+	
 	public void configPeakOutputVoltage(double forwardVoltage, double reverseVoltage) {
 		// ????
 	}
@@ -90,25 +93,27 @@ public class CANTalon implements SpeedController, LiveWindowSendable {
 		return talonSRX.getInverted();
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public double getOutputCurrent() {
 		return talonSRX.getOutputCurrent();
 	}
 
-	@Override
 	public String getSmartDashboardType() {
 		return "Speed Controller";
 	}
 
-	@Override
-	public void initTable(NetworkTable subtable) {
-		this.networkTable = subtable;
-		if (subtable != null) {
-			m_valueEntry = subtable.getEntry("Value");
-			updateTable();
-		} else {
-			m_valueEntry = null;
-		}
+	public String getSubsystem() {
+		return subsystem;
 	}
+	
+	public void initSendable(SendableBuilder builder) {
+	    builder.setSmartDashboardType("Speed Controller");
+	    builder.setSafeState(() -> disable());
+	    builder.addDoubleProperty("Value", () -> get(), (value) -> set(value));
+	  }
 
 	@Override
 	public void pidWrite(double speed) {
@@ -135,6 +140,10 @@ public class CANTalon implements SpeedController, LiveWindowSendable {
 		talonSRX.setInverted(isInverted);
 	}
 
+	public void setName(String s) {
+		name = s;
+	}
+
 	public void setPID(double pidP, double pidI, double pidD, double pidF, int pidIZone, double pidRampRate,
 			int pidProfileSlot) {
 		talonSRX.config_kP(pidProfileSlot, pidP, timeoutMs);
@@ -146,23 +155,8 @@ public class CANTalon implements SpeedController, LiveWindowSendable {
 		talonSRX.selectProfileSlot(pidProfileSlot);
 	}
 
-	@Override
-	public void startLiveWindowMode() {
-		stopMotor();
-		final Consumer<EntryNotification> listener = new Consumer<EntryNotification>() {
-			public void accept(EntryNotification event) {
-				set(event.value.getDouble());
-			}
-		};
-		m_valueListener = m_valueEntry.addListener(listener,
-				EntryListenerFlags.kImmediate | EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
-	}
-
-	@Override
-	public void stopLiveWindowMode() {
-		stopMotor();
-		m_valueEntry.removeListener(m_valueListener);
-		m_valueListener = 0;
+	public void setSubsystem(String s) {
+		subsystem = s;
 	}
 
 	@Override
@@ -175,10 +169,4 @@ public class CANTalon implements SpeedController, LiveWindowSendable {
 		return "CANTalon(" + deviceNumber + ")";
 	}
 
-	@Override
-	public void updateTable() {
-		if (m_valueEntry != null) {
-			m_valueEntry.setDouble(get());
-		}
-	}
 }
