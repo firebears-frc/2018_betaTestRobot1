@@ -72,14 +72,6 @@ public class CANTalon implements SpeedController, Sendable {
 		return currentSpeed;
 	}
 
-	public int getEncPosition() {
-		return talonSRX.getSelectedSensorPosition();
-	}
-
-	public int getEncVelocity() {
-		return talonSRX.getSelectedSensorVelocity();
-	}
-
 	@Override
 	public boolean getInverted() {
 		return talonSRX.getInverted();
