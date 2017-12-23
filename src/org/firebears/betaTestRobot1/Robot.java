@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.SpeedController;
  */
 public class Robot extends IterativeRobot {
 
+	public static final boolean DEBUG = false;
 	public static final int MOTOR_CAN_ID = 2;
 
 	Joystick joystick = null;
@@ -55,7 +56,7 @@ public class Robot extends IterativeRobot {
 		(new Compressor()).clearAllPCMStickyFaults();
 
 		report.write(System.out);
-		report.write(new File(System.getProperty("user.home"), "robotReport.md"));
+		report.write(new File(System.getProperty("user.home"), "robotReport.md"), DEBUG);
 	}
 
 	@Override
