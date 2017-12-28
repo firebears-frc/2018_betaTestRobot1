@@ -5,7 +5,7 @@ import static java.lang.Math.max;
 
 import java.io.File;
 import java.io.PrintStream;
-import com.ctre.phoenix.MotorControl.CAN.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import org.firebears.util.RobotReport;
 
 import edu.wpi.first.wpilibj.Compressor;
