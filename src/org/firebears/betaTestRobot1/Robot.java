@@ -45,8 +45,8 @@ public class Robot extends IterativeRobot {
 
 		TalonSRX _motor = new TalonSRX(MOTOR_CAN_ID);
 		motor = _motor.getWPILIB_SpeedController();
-		((WpilibSpeedController)motor).setName("Motor");
-		LiveWindow.add(((WpilibSpeedController)motor));
+		((WpilibSpeedController) motor).setName("Motor");
+		LiveWindow.add(((WpilibSpeedController) motor));
 		report.addCAN(MOTOR_CAN_ID, "Motor", motor);
 
 		driverStation = DriverStation.getInstance();
@@ -64,12 +64,16 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		// Verify that we can send values to the motor controller
 		double value = joystick.getY();
-		if (abs(joystick.getX()) > 0.2 || joystick.getY() > 0.2 || joystick.getZ() > 0.2) {
-			out.printf("\t::: value = %4.2f :  %5.2f,%5.2f,%5.2f  %5.2f,%5.2f%n", value,
-					joystick.getX(), joystick.getY(), joystick.getZ(), joystick.getTwist(),
-					joystick.getThrottle());
+		if (joystick.getTrigger()) {
+			out.printf("\t::: STOP%n");
+			motor.stopMotor();
+		} else {
+			if (abs(joystick.getX()) > 0.2 || joystick.getY() > 0.2 || joystick.getZ() > 0.2) {
+				out.printf("\t::: value = %4.2f :  %5.2f,%5.2f,%5.2f  %5.2f,%5.2f%n", value, joystick.getX(),
+						joystick.getY(), joystick.getZ(), joystick.getTwist(), joystick.getThrottle());
+			}
+			motor.set(value);
 		}
-		motor.set(value);
 	}
 
 }

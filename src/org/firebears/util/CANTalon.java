@@ -69,6 +69,14 @@ public class CANTalon implements SpeedController, Sendable {
 	}
 
 	@Override
+	public boolean equals(Object other) {
+		if (other == null || !(other instanceof CANTalon)) {
+			return false;
+		}
+		return other.hashCode() == this.hashCode();
+	}
+
+	@Override
 	public double get() {
 		return currentSpeed;
 	}
@@ -108,6 +116,11 @@ public class CANTalon implements SpeedController, Sendable {
 	@Override
 	public String getSubsystem() {
 		return ((WpilibSpeedController) talonSRX.getWPILIB_SpeedController()).getSubsystem();
+	}
+
+	@Override
+	public int hashCode() {
+		return 47 * talonSRX.hashCode() + 37 * deviceNumber;
 	}
 
 	@Override
@@ -172,5 +185,4 @@ public class CANTalon implements SpeedController, Sendable {
 		return "CANTalon(" + deviceNumber + (getSubsystem() != null ? "," + getSubsystem() : "")
 				+ (getName() != null ? "," + getName() : "") + ")";
 	}
-
 }
