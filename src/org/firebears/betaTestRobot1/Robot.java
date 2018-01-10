@@ -1,14 +1,13 @@
 package org.firebears.betaTestRobot1;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.max;
 
 import java.io.File;
 import java.io.PrintStream;
 
-import com.ctre.phoenix.motorcontrol.WpilibSpeedController;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import org.firebears.util.RobotReport;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -16,7 +15,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * Simple program to verify that we can load code into the roboRIO and that we
@@ -43,10 +41,8 @@ public class Robot extends IterativeRobot {
 		joystick = new Joystick(0);
 		report.addJoystick(0, "Main Joystick", joystick);
 
-		TalonSRX _motor = new TalonSRX(MOTOR_CAN_ID);
-		motor = _motor.getWPILIB_SpeedController();
-		((WpilibSpeedController) motor).setName("Motor");
-		LiveWindow.add(((WpilibSpeedController) motor));
+		WPI_TalonSRX _motor = new WPI_TalonSRX(MOTOR_CAN_ID);
+		_motor.setName("Motor");
 		report.addCAN(MOTOR_CAN_ID, "Motor", motor);
 
 		driverStation = DriverStation.getInstance();
