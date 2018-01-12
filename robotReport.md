@@ -1,23 +1,25 @@
-# betaTestRobot1, as of 2017.12.17
+# betaTestRobot1, as of 2018.01.12
+
+roboRIO serial number: 030a4a34
 
 IterativeRobot for testing the 2018 beta software.
 
 ## CAN
 
-* 2 = Motor : com.ctre.phoenix.MotorControl.WpilibSpeedController@1097b5d
+* 2 = Motor : com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX@1a7cec2
 
 ## Joysticks
 
-* 0 = Main Joystick : org.firebears.betaTestRobot1.Robot$1@2c634b
+* 0 = Main Joystick : edu.wpi.first.wpilibj.Joystick@117ae12
 
 ## DriverStation
 
 * DS voltage = 12.00
-* alliance = Invalid
+* alliance = Red
 
 ## Power Distribution Panel
 
-* PDP voltage = 12.20
+* PDP voltage = 12.15
 * PDP current =  0.00
 * PDP temp = 21.97 C
 
@@ -72,7 +74,7 @@ IterativeRobot for testing the 2018 beta software.
 * user.home = /home/lvuser
 * user.language = L1
 * user.name = lvuser
-* user.timezone = Etc/UTC
+* user.timezone = CST6CDT
 
 ## Environment Variables
 
@@ -95,7 +97,7 @@ IterativeRobot for testing the 2018 beta software.
 * availableProcessors = 2
 * totalMemory = 6,094,848
 * maxMemory = 97,320,960
-* freeMemory = 4,529,136
+* freeMemory = 4,474,168
 
 ## Java classpath
 

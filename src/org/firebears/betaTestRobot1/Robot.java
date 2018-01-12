@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.SpeedController;
  */
 public class Robot extends IterativeRobot {
 
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	public static final int MOTOR_CAN_ID = 2;
 
 	Joystick joystick = null;
@@ -41,8 +41,8 @@ public class Robot extends IterativeRobot {
 		joystick = new Joystick(0);
 		report.addJoystick(0, "Main Joystick", joystick);
 
-		WPI_TalonSRX _motor = new WPI_TalonSRX(MOTOR_CAN_ID);
-		_motor.setName("Motor");
+		motor = new WPI_TalonSRX(MOTOR_CAN_ID);
+		((WPI_TalonSRX)motor).setName("Motor");
 		report.addCAN(MOTOR_CAN_ID, "Motor", motor);
 
 		driverStation = DriverStation.getInstance();
