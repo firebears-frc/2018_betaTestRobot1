@@ -11,16 +11,16 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.TimedRobot;
 
 /**
  * Simple program to verify that we can load code into the roboRIO and that we
  * can communicate to other parts of the robot.
  */
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 
 	public static final boolean DEBUG = true;
 	public static final int MOTOR_CAN_ID = 2;
