@@ -14,5 +14,6 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>edu.wpi.first.wpilib.plugins.core.nature.FRCProjectNature</nature>
+		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 	</natures>
 </projectDescription>

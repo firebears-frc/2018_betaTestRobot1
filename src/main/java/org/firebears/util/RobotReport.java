@@ -196,7 +196,6 @@ public class RobotReport {
 	    out.println("## DriverStation");
 	    out.println();
 	    DriverStation driverStation = DriverStation.getInstance();
-	    out.printf("* DS voltage = %5.2f%n", driverStation.getBatteryVoltage());
 	    out.printf("* alliance = %s%n", driverStation.getAlliance());
 	    out.println();
 

@@ -1,6 +1,7 @@
 /bin/
 /build/
 /dist/
+/.gradle/
 /.settings/
 *.class
 *.bak
