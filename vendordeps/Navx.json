@@ -1,0 +1,23 @@
+{
+    "fileName": "Navx.json",
+    "name": "navx_frc",
+    "version": "3.0.348",
+    "mavenUrls": [
+        "https://www.kauailabs.com/maven2/"
+    ],
+    "jsonUrl": "",
+    "javaDependencies": [
+        {
+            "groupId": "com.kauailabs.navx.frc",
+            "artifactId": "navx_frc",
+            "version": "3.0.348"
+        },
+        {
+            "groupId": "com.kauailabs.navx",
+            "artifactId": "navx",
+            "version": "3.0.324"
+        }
+    ],
+    "jniDependencies": [
+    ]
+}

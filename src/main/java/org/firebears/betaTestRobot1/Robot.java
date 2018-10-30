@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  * Simple program to verify that we can load code into the roboRIO and that we
@@ -30,6 +33,7 @@ public class Robot extends TimedRobot {
 	PowerDistributionPanel pdp = null;
 	DriverStation driverStation = null;
 	PrintStream out = System.out;
+	AHRS navXBoard = null;
 
 	@Override
 	public void robotInit() {
@@ -44,6 +48,12 @@ public class Robot extends TimedRobot {
 		motor = new WPI_TalonSRX(MOTOR_CAN_ID);
 		((WPI_TalonSRX)motor).setName("Motor");
 		report.addCAN(MOTOR_CAN_ID, "Motor", motor);
+
+		try {
+			navXBoard = new AHRS(Port.kUSB);
+		} catch (RuntimeException ex) {
+			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+		}
 
 		driverStation = DriverStation.getInstance();
 		pdp = new PowerDistributionPanel();
@@ -70,6 +80,7 @@ public class Robot extends TimedRobot {
 			}
 			motor.set(value);
 		}
+		 SmartDashboard.putNumber("NavX Angle", navXBoard.getAngle());
 	}
 
 }
