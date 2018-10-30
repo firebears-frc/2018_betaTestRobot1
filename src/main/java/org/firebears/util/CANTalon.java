@@ -26,10 +26,6 @@ public class CANTalon extends WPI_TalonSRX {
   public void changeControlMode(ControlMode talonControlMode) {
     this.controlMode = talonControlMode;
   }
-  
-  public void clearStickyFaults() {
-    this.clearStickyFaults(timeoutMs);
-  }
 
   public void configEncoderCodesPerRev(int ticks) {
     this.encoderMultiplier = ticks;
