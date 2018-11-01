@@ -60,10 +60,10 @@ public class Robot extends TimedRobot {
 
 		// Programmatically clear out faults in the components
 		pdp.clearStickyFaults();
-		(new Compressor()).clearAllPCMStickyFaults();
+		// (new Compressor()).clearAllPCMStickyFaults();
 
-		report.write(System.out);
-		report.write(new File(System.getProperty("user.home"), "robotReport.md"), DEBUG);
+		// report.write(System.out);
+		// report.write(new File(System.getProperty("user.home"), "robotReport.md"), DEBUG);
 	}
 
 	@Override
@@ -71,16 +71,15 @@ public class Robot extends TimedRobot {
 		// Verify that we can send values to the motor controller
 		double value = joystick.getY();
 		if (joystick.getTrigger()) {
-			out.printf("\t::: STOP%n");
 			motor.stopMotor();
 		} else {
-			if (abs(joystick.getX()) > 0.2 || joystick.getY() > 0.2 || joystick.getZ() > 0.2) {
-				out.printf("\t::: value = %4.2f :  %5.2f,%5.2f,%5.2f  %5.2f,%5.2f%n", value, joystick.getX(),
-						joystick.getY(), joystick.getZ(), joystick.getTwist(), joystick.getThrottle());
-			}
 			motor.set(value);
 		}
-		 SmartDashboard.putNumber("NavX Angle", navXBoard.getAngle());
+		//  SmartDashboard.putNumber("NavX Angle", navXBoard.getAngle());
+		 if ((++t)%20 == 0)  {
+		//  System.out.println("angle=" + navXBoard.getAngle());
+		 }
 	}
+	long t = 0;
 
 }
