@@ -231,12 +231,6 @@ public class RobotReport {
 	    out.printf("* freeMemory = %s%n", numberFormat.format(Runtime.getRuntime().freeMemory()));
 	    out.println();
 
-	    out.println("## Java classpath");
-	    out.println();
-	    URLClassLoader cl = (URLClassLoader) ClassLoader.getSystemClassLoader();
-	    for (URL url : cl.getURLs()) {
-		out.printf("* %s%n", url.getFile());
-	    }
 	    out.println();
 	}
 

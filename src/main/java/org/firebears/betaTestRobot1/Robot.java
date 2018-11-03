@@ -1,23 +1,21 @@
 package org.firebears.betaTestRobot1;
 
-import static java.lang.Math.abs;
-
-import java.io.File;
 import java.io.PrintStream;
 
 import org.firebears.util.RobotReport;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import java.io.File;
 
-import edu.wpi.first.wpilibj.Compressor;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.SerialPort.Port;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * Simple program to verify that we can load code into the roboRIO and that we
@@ -49,21 +47,22 @@ public class Robot extends TimedRobot {
 		((WPI_TalonSRX)motor).setName("Motor");
 		report.addCAN(MOTOR_CAN_ID, "Motor", motor);
 
-		try {
-			navXBoard = new AHRS(Port.kUSB);
-		} catch (RuntimeException ex) {
-			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-		}
+//		try {
+//			navXBoard = new AHRS(Port.kUSB);
+//		} catch (RuntimeException ex) {
+//			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+//		}
 
 		driverStation = DriverStation.getInstance();
 		pdp = new PowerDistributionPanel();
+	    LiveWindow.disableTelemetry(pdp);
 
 		// Programmatically clear out faults in the components
 		pdp.clearStickyFaults();
 		// (new Compressor()).clearAllPCMStickyFaults();
 
-		// report.write(System.out);
-		// report.write(new File(System.getProperty("user.home"), "robotReport.md"), DEBUG);
+		 report.write(System.out);
+		 report.write(new File(System.getProperty("user.home"), "robotReport.md"), DEBUG);
 	}
 
 	@Override
