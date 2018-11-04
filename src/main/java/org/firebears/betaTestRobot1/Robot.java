@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Simple program to verify that we can load code into the roboRIO and that we
@@ -47,11 +48,11 @@ public class Robot extends TimedRobot {
 		((WPI_TalonSRX)motor).setName("Motor");
 		report.addCAN(MOTOR_CAN_ID, "Motor", motor);
 
-//		try {
-//			navXBoard = new AHRS(Port.kUSB);
-//		} catch (RuntimeException ex) {
-//			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-//		}
+		// try {
+		// 	navXBoard = new AHRS(Port.kUSB);
+		// } catch (RuntimeException ex) {
+		// 	DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+		// }
 
 		driverStation = DriverStation.getInstance();
 		pdp = new PowerDistributionPanel();
@@ -63,6 +64,16 @@ public class Robot extends TimedRobot {
 
 		 report.write(System.out);
 		 report.write(new File(System.getProperty("user.home"), "robotReport.md"), DEBUG);
+	}
+
+	@Override
+	public void robotPeriodic() {
+		if (navXBoard!=null) {
+			SmartDashboard.putNumber("navx angle", navXBoard.getAngle());
+		}
+		if (pdp!=null) {
+			SmartDashboard.putNumber("pdp voltage", pdp.getVoltage());
+		}
 	}
 
 	@Override
