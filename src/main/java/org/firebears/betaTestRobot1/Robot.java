@@ -74,6 +74,27 @@ public class Robot extends TimedRobot {
 		if (pdp!=null) {
 			SmartDashboard.putNumber("pdp voltage", pdp.getVoltage());
 		}
+
+		// XBox controller test:
+		SmartDashboard.putNumber("left-x", joystick.getX());
+		SmartDashboard.putNumber("left-y", joystick.getY());
+		SmartDashboard.putNumber("right-x", joystick.getRawAxis(4));
+		SmartDashboard.putNumber("right-y", joystick.getRawAxis(5));
+		SmartDashboard.putNumber("left-trigger", joystick.getRawAxis(2));
+		SmartDashboard.putNumber("right-trigger", joystick.getRawAxis(3));
+		SmartDashboard.putNumber("POV", joystick.getPOV());
+	
+		SmartDashboard.putBoolean("A-button", joystick.getTrigger());
+		SmartDashboard.putBoolean("B-button", joystick.getTop());
+		SmartDashboard.putBoolean("X-button", joystick.getRawButton(3));
+		SmartDashboard.putBoolean("Y-button", joystick.getRawButton(4));
+		SmartDashboard.putBoolean("left-bumper", joystick.getRawButton(5));
+		SmartDashboard.putBoolean("right-bumper", joystick.getRawButton(6));
+		SmartDashboard.putBoolean("back-button", joystick.getRawButton(7));
+		SmartDashboard.putBoolean("next-button", joystick.getRawButton(8));
+	
+		SmartDashboard.putBoolean("left-stick", joystick.getRawButton(9));
+		SmartDashboard.putBoolean("right-stick", joystick.getRawButton(10));
 	}
 
 	@Override
